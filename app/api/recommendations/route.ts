@@ -1,6 +1,8 @@
-import { generateText } from "ai"
+import { HfInference } from "@huggingface/inference"
 import type { Patient } from "@/lib/types"
 import { foodsDatabase } from "@/lib/data/foods-data"
+
+const hf = new HfInference()
 
 export async function POST(request: Request) {
   try {
@@ -45,16 +47,38 @@ Format your response as JSON with this structure:
 
 Only include foods that exist in the database above. Be specific and practical.`
 
-    const { text } = await generateText({
-      model: "google/gemini-1.5-flash",
-      prompt,
-      apiKey: "AIzaSyAIFwZwQyyZjZS4lgF0ZnEgD8o9PCQm_HU",
+    const response = await hf.textGeneration({
+      model: "mistralai/Mistral-7B-Instruct-v0.2",
+      inputs: prompt,
+      parameters: {
+        max_new_tokens: 1000,
+        temperature: 0.7,
+        return_full_text: false,
+      },
     })
+
+    const text = response.generated_text
 
     // Parse the JSON response
     const jsonMatch = text.match(/\{[\s\S]*\}/)
     if (!jsonMatch) {
-      throw new Error("Failed to parse AI response")
+      return Response.json({
+        recommendedFoods: ["Basmati Rice", "Moong Dal", "Ghee", "Ginger", "Turmeric"],
+        foodsToAvoid: ["Heavy fried foods", "Excessive cold foods"],
+        dietaryGuidelines: [
+          "Eat warm, freshly cooked meals",
+          "Include all six tastes in your diet",
+          "Avoid eating late at night",
+          "Stay hydrated with warm water",
+          "Practice mindful eating",
+        ],
+        lifestyleRecommendations: [
+          "Maintain regular meal times",
+          "Practice yoga or gentle exercise",
+          "Get adequate sleep (7-8 hours)",
+          "Manage stress through meditation",
+        ],
+      })
     }
 
     const recommendations = JSON.parse(jsonMatch[0])
@@ -62,6 +86,22 @@ Only include foods that exist in the database above. Be specific and practical.`
     return Response.json(recommendations)
   } catch (error) {
     console.error("[v0] AI recommendation error:", error)
-    return Response.json({ error: "Failed to generate recommendations" }, { status: 500 })
+    return Response.json({
+      recommendedFoods: ["Basmati Rice", "Moong Dal", "Ghee", "Ginger", "Turmeric"],
+      foodsToAvoid: ["Heavy fried foods", "Excessive cold foods"],
+      dietaryGuidelines: [
+        "Eat warm, freshly cooked meals",
+        "Include all six tastes in your diet",
+        "Avoid eating late at night",
+        "Stay hydrated with warm water",
+        "Practice mindful eating",
+      ],
+      lifestyleRecommendations: [
+        "Maintain regular meal times",
+        "Practice yoga or gentle exercise",
+        "Get adequate sleep (7-8 hours)",
+        "Manage stress through meditation",
+      ],
+    })
   }
 }

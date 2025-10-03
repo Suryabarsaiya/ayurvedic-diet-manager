@@ -1,24 +1,63 @@
 "use client"
 
+import type React from "react"
+
 import { useState } from "react"
 import { useStore } from "@/lib/store"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
 import { Input } from "@/components/ui/input"
 import { Badge } from "@/components/ui/badge"
-import { Search, Utensils } from "lucide-react"
+import { Button } from "@/components/ui/button"
+import { Search, Utensils, Plus, Trash2 } from "lucide-react"
 import { getRasaTranslation, getGunaTranslation } from "@/lib/utils/ayurveda"
+import { AddFoodDialog } from "./add-food-dialog"
+import {
+  AlertDialog,
+  AlertDialogAction,
+  AlertDialogCancel,
+  AlertDialogContent,
+  AlertDialogDescription,
+  AlertDialogFooter,
+  AlertDialogHeader,
+  AlertDialogTitle,
+} from "@/components/ui/alert-dialog"
 
 export function FoodDatabase() {
-  const { foods } = useStore()
+  const { foods, deleteFood } = useStore()
   const [searchQuery, setSearchQuery] = useState("")
+  const [isAddDialogOpen, setIsAddDialogOpen] = useState(false)
+  const [deleteDialogOpen, setDeleteDialogOpen] = useState(false)
+  const [foodToDelete, setFoodToDelete] = useState<string | null>(null)
 
   const filteredFoods = foods.filter((food) => food.name.toLowerCase().includes(searchQuery.toLowerCase()))
 
+  const handleDeleteClick = (foodId: string, e: React.MouseEvent) => {
+    e.stopPropagation()
+    setFoodToDelete(foodId)
+    setDeleteDialogOpen(true)
+  }
+
+  const confirmDelete = () => {
+    if (foodToDelete) {
+      deleteFood(foodToDelete)
+      setDeleteDialogOpen(false)
+      setFoodToDelete(null)
+    }
+  }
+
   return (
     <div className="space-y-4">
-      <div>
-        <h2 className="text-2xl font-semibold tracking-tight">Food Database</h2>
-        <p className="text-sm text-muted-foreground">Browse foods with Ayurvedic and nutritional properties</p>
+      <div className="flex items-center justify-between">
+        <div>
+          <h2 className="text-2xl font-semibold tracking-tight">Food Database</h2>
+          <p className="text-sm text-muted-foreground">
+            Browse and manage foods with Ayurvedic and nutritional properties
+          </p>
+        </div>
+        <Button onClick={() => setIsAddDialogOpen(true)}>
+          <Plus className="mr-2 h-4 w-4" />
+          Add Food
+        </Button>
       </div>
 
       <div className="relative">
@@ -41,14 +80,24 @@ export function FoodDatabase() {
       ) : (
         <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
           {filteredFoods.map((food) => (
-            <Card key={food.id}>
+            <Card key={food.id} className="relative">
               <CardHeader>
                 <div className="flex items-start justify-between">
                   <div>
                     <CardTitle className="text-lg">{food.name}</CardTitle>
                     <CardDescription>{food.category}</CardDescription>
                   </div>
-                  <Badge variant="outline">{food.servingSize}</Badge>
+                  <div className="flex items-center gap-2">
+                    <Badge variant="outline">{food.servingSize}</Badge>
+                    <Button
+                      variant="ghost"
+                      size="icon"
+                      className="h-8 w-8 text-destructive hover:bg-destructive/10"
+                      onClick={(e) => handleDeleteClick(food.id, e)}
+                    >
+                      <Trash2 className="h-4 w-4" />
+                    </Button>
+                  </div>
                 </div>
               </CardHeader>
               <CardContent className="space-y-4">
@@ -137,6 +186,28 @@ export function FoodDatabase() {
           ))}
         </div>
       )}
+
+      <AddFoodDialog open={isAddDialogOpen} onOpenChange={setIsAddDialogOpen} />
+
+      <AlertDialog open={deleteDialogOpen} onOpenChange={setDeleteDialogOpen}>
+        <AlertDialogContent>
+          <AlertDialogHeader>
+            <AlertDialogTitle>Delete Food Item</AlertDialogTitle>
+            <AlertDialogDescription>
+              Are you sure you want to delete this food item? This action cannot be undone.
+            </AlertDialogDescription>
+          </AlertDialogHeader>
+          <AlertDialogFooter>
+            <AlertDialogCancel>Cancel</AlertDialogCancel>
+            <AlertDialogAction
+              onClick={confirmDelete}
+              className="bg-destructive text-destructive-foreground hover:bg-destructive/90"
+            >
+              Delete
+            </AlertDialogAction>
+          </AlertDialogFooter>
+        </AlertDialogContent>
+      </AlertDialog>
     </div>
   )
 }

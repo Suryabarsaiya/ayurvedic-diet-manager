@@ -11,6 +11,7 @@ import { Textarea } from "@/components/ui/textarea"
 import { Plus, Trash2, Save, Sparkles, Loader2 } from "lucide-react"
 import { FoodSelector } from "./food-selector"
 import { DietPlanPreview } from "./diet-plan-preview"
+import { SmartMealPlanner } from "./smart-meal-planner"
 import type { Meal, MealItem } from "@/lib/types"
 import { useRouter } from "next/navigation"
 
@@ -28,6 +29,8 @@ export function CreateDietPlan() {
   const [restrictions, setRestrictions] = useState("")
   const [notes, setNotes] = useState("")
   const [loadingAI, setLoadingAI] = useState(false)
+  const [showSmartPlanner, setShowSmartPlanner] = useState(false)
+  const [selectedMealForAI, setSelectedMealForAI] = useState<string>("")
 
   const selectedPatient = patients.find((p) => p.id === selectedPatientId)
 
@@ -163,6 +166,15 @@ export function CreateDietPlan() {
             )}
           </CardContent>
         </Card>
+
+        {selectedPatient && (
+          <SmartMealPlanner
+            patient={selectedPatient}
+            mealType={meals.find((m) => m.id === selectedMealForAI)?.name || "General"}
+            timeOfDay={meals.find((m) => m.id === selectedMealForAI)?.time || ""}
+            onFoodsSelected={(foods) => console.log("[v0] Selected foods:", foods)}
+          />
+        )}
 
         <Card>
           <CardHeader>
