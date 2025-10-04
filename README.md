@@ -1,30 +1,79 @@
 # Ayurvedic diet manager
 
-*Automatically synced with your [v0.app](https://v0.app) deployments*
+AyurDiet – Ayurvedic Diet Manager
 
-[![Deployed on Vercel](https://img.shields.io/badge/Deployed%20on-Vercel-black?style=for-the-badge&logo=vercel)](https://vercel.com/btechcodingwala-2048s-projects/v0-ayurvedic-diet-manager)
-[![Built with v0](https://img.shields.io/badge/Built%20with-v0.app-black?style=for-the-badge)](https://v0.app/chat/projects/hI6w56jYz2P)
+🚀 AyurDiet is a cloud-based platform that merges modern nutrition tracking with Ayurvedic principles, enabling dietitians and nutritionists to provide personalized, efficient, and holistic healthcare solutions.
 
-## Overview
+🔗 Live Demo: https://v0-ayurvedic-diet-manager.vercel.app/patients
 
-This repository will stay in sync with your deployed chats on [v0.app](https://v0.app).
-Any changes you make to your deployed app will be automatically pushed to this repository from [v0.app](https://v0.app).
+🌟 Overview
 
-## Deployment
+Modern diet management is often generic, time-consuming, and incomplete without holistic approaches. AyurDiet solves this by combining technology with traditional Ayurvedic wisdom, allowing healthcare professionals to:
 
-Your project is live at:
+📝 Create personalized diet charts instantly
 
-**[https://vercel.com/btechcodingwala-2048s-projects/v0-ayurvedic-diet-manager](https://vercel.com/btechcodingwala-2048s-projects/v0-ayurvedic-diet-manager)**
+👩‍⚕️ Manage patients digitally and securely
 
-## Build your app
+📤 Export diet plans in one click
 
-Continue building your app on:
+🌿 Integrate Ayurvedic principles with modern nutrition science
 
-**[https://v0.app/chat/projects/hI6w56jYz2P](https://v0.app/chat/projects/hI6w56jYz2P)**
+🛠️ Features
 
-## How It Works
+Digital Patient Management – Store & update records easily
 
-1. Create and modify your project using [v0.app](https://v0.app)
-2. Deploy your chats from the v0 interface
-3. Changes are automatically pushed to this repository
-4. Vercel deploys the latest version from this repository
+Custom Diet Chart Creation – Personalized plans in seconds
+
+Instant Export – Share PDF/print-ready plans
+
+Ayurvedic Nutrition Mapping – Holistic health integration
+
+Cloud-Based – Accessible anywhere, anytime
+
+🧑‍💻 Tech Stack
+
+Frontend: React.js / Next.js
+
+Backend: Node.js / Express.js 
+
+Database: Local
+
+Deployment: Vercel
+
+🚀 Installation & Setup
+
+Clone the repository
+
+git clone https://github.com/your-username/ayurdiet.git
+cd ayurdiet
+
+
+Install dependencies
+
+npm install
+
+
+Run locally
+
+npm run dev
+
+
+📌 Roadmap
+
+🔹 AI-based personalized diet suggestions
+
+🔹 Multi-language support
+
+🔹 Mobile app integration
+
+🔹 Advanced analytics for dietitians
+
+🤝 Contributing
+
+Contributions are welcome! Please fork the repo, create a new branch, and submit a pull request.
+
+📧 Contact
+
+👤 Surya Gupta 
+
+✉️ suryabarsaiya@gmail.com
