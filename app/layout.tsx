@@ -15,21 +15,21 @@ const _v0_fontVariables = `${_inter.variable} ${_geistMono.variable} ${_sourceSe
 
 const inter = Inter({
   subsets: ["latin"],
-  weight: ["100", "200", "300", "400", "500", "600", "700", "800", "900"],
+  weight: ["100", "200", "300", "400", "500", "600", "700", "800"],
   variable: "--font-inter",
   display: "swap",
 })
 
 const jetbrainsMono = JetBrains_Mono({
   subsets: ["latin"],
-  weight: ["100", "200", "300", "400", "500", "600", "700", "800", "900"],
+  weight: ["100", "200", "300", "400", "500", "600", "700", "800"],
   variable: "--font-jetbrains-mono",
   display: "swap",
 })
 
 const sourceSerif = Source_Serif_4({
   subsets: ["latin"],
-  weight: ["200", "300", "400", "500", "600", "700", "800", "900"],
+  weight: ["200", "300", "400", "500", "600", "700", "800"],
   variable: "--font-source-serif",
   display: "swap",
 })
