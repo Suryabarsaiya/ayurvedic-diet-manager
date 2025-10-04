@@ -39,8 +39,9 @@
   --sidebar-border: #e7dcc3;
   --sidebar-ring: #d97706;
   --font-sans: var(--font-inter);
-  --font-mono: "Geist Mono", "Geist Mono Fallback";
-  --font-serif: "Source Serif 4", "Source Serif 4 Fallback";
+  /* Updated to use JetBrains Mono instead of Geist Mono */
+  --font-mono: var(--v0-font-jetbrains-mono);
+  --font-serif: var(--v0-font-source-serif-4);
   --shadow-x: 0px;
   --shadow-y: 2px;
   --shadow-blur: 8px;
@@ -93,8 +94,9 @@
 
 @theme inline {
   --font-sans: var(--font-inter);
-  --font-mono: "Geist Mono", "Geist Mono Fallback";
-  --font-serif: "Source Serif 4", "Source Serif 4 Fallback";
+  /* Updated to use JetBrains Mono instead of Geist Mono */
+  --font-mono: var(--v0-font-jetbrains-mono);
+  --font-serif: var(--v0-font-source-serif-4);
   --color-background: var(--background);
   --color-foreground: var(--foreground);
   --color-card: var(--card);
