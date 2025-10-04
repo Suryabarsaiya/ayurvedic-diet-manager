@@ -44,7 +44,7 @@ Deployment: Vercel
 
 Clone the repository
 
-git clone https://github.com/your-username/ayurdiet.git
+git clone https://github.com/Suryabarsaiya/ayurvedic-diet-manager
 cd ayurdiet
 
 
